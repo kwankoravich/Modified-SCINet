@@ -10,7 +10,12 @@ python main.py
 ```
 ## Configuration Setup
 
-`seq_len` is the number of input to forecast output\
-`pred_len` is the number of step size to forecast the step of output\
-`in_dim` is the number of dimension of input (feature inputs)\
-`kernel` is the kernel of convolution 1D, should be odd value (3,5,7,...)
+
+The term `seq_len` refers to the number of inputs used for forecasting the output.\
+`pred_len` denotes the size or number of steps used to forecast the output at each step.\
+`in_dim`represents the number of dimensions in the input, which corresponds to the number of features used as inputs.\
+The `kernel` is the 1D convolution kernel, and it should have an odd value (e.g., 3, 5, 7, etc.).
+
+
+
+
