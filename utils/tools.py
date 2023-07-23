@@ -1,5 +1,6 @@
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from tqdm.notebook import tqdm
+import pandas as pd
 
 def train_test_split(df:pd.DataFrame, ratio:int):
     train_df = df.iloc[: round(df.shape[0] * ratio)]
