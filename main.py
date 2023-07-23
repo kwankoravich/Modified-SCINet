@@ -4,7 +4,7 @@ from config.config_model import Config
 from train import train
 from prediction import predict
 
-df = pd.read_csv('/content/stock_alldays.csv')
+df = pd.read_csv('stock_alldays.csv')
 company_name = df.name.unique()
 # df = df[df.name == 'KTC']
 df = df[['time', 'name','open','high','low','close']]
