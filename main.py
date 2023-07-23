@@ -37,3 +37,5 @@ for idx, name in enumerate(company_name):
 
     # if idx == 3:
     #    break
+
+pd.DataFrame(predict_pct_change.items(), columns = ['Stock', 'Percentage Change']).to_csv('stock_ranking.csv', index = False)
