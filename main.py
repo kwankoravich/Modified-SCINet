@@ -1,11 +1,11 @@
 import pandas as pd
+import random
 from utils.tools import train_test_split
 from config.config_model import Config
 from train import train
 from prediction import predict
 
 df = pd.read_csv('stock_alldays.csv')
-company_name = df.name.unique()
 # df = df[df.name == 'KTC']
 df = df[['time', 'name','open','high','low','close']]
 # df = df.drop(columns=['lastSequence', 'open', 'high', 'low', 'close', 'volume', 'value', 'name', 'open_previous', 'close_previous', 'high_previous', 'low_previous', 'volume_previous', 'open_future', 'close_future', 'high_future', 'low_future', 'volume_future', 'first_day', 'last_day', 'period'])
@@ -15,6 +15,7 @@ df = df.set_index('date')
 # df = df.dropna()
 
 company_name = df.name.unique()
+company_name = random.sample(sorted(company_name), len(company_name))
 
 predict_pct_change = {}
 config = Config()

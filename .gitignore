@@ -3,3 +3,4 @@ scinet_pytorch/
 __pycache__
 scaler.save
 *.ipynb
+**/.DS_Store
