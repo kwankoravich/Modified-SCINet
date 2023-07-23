@@ -85,11 +85,11 @@ def train(data):
                 modified = True,
                 RIN=config.RIN).to(device)
 
-    # print(summary(model,
-    #         input_size=(config.batch_size, config.seq_len, len(train_df.columns)),
-    #         col_names=["input_size", "output_size", "num_params", "trainable"],
-    #         col_width=20,
-    #         row_settings=["var_names"]))
+    print(summary(model,
+            input_size=(config.batch_size, config.seq_len, len(train_df.columns)),
+            col_names=["input_size", "output_size", "num_params", "trainable"],
+            col_width=20,
+            row_settings=["var_names"]))
 
     # optimizer
     n_epochs = config.n_epochs

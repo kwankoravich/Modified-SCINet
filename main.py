@@ -20,6 +20,7 @@ predict_pct_change = {}
 config = Config()
 
 for idx, name in enumerate(company_name):
+    
     data = df[df.name == name].copy()
     data = data.drop(columns = ['name'])
     data = data.pct_change()
@@ -29,13 +30,14 @@ for idx, name in enumerate(company_name):
 
     if len(data) < config.seq_len or len(val_data) < config.seq_len:
         continue
-
+    print(name)
     model = train(data)
     # print('test')
     pred = predict(model, val_data)
     predict_pct_change[name] = pred
+    pd.DataFrame(predict_pct_change.items(), columns = ['Stock', 'Percentage Change']).to_csv('stock_ranking.csv', index = False)
 
     # if idx == 3:
     #    break
 
-pd.DataFrame(predict_pct_change.items(), columns = ['Stock', 'Percentage Change']).to_csv('stock_ranking.csv', index = False)
+# pd.DataFrame(predict_pct_change.items(), columns = ['Stock', 'Percentage Change']).to_csv('stock_ranking.csv', index = False)

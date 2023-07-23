@@ -1,2 +1,5 @@
 scinet_pytorch/
 *.csv
+__pycache__
+scaler.save
+*.ipynb

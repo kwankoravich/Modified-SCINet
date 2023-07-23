@@ -1,12 +1,12 @@
 class Config:
-    train_test_split = 0.8
+    train_test_split = 0.9
     norm_method = 'standard' # 'minmax', 'standard'
-    batch_size = 64
+    batch_size = 1024
     seq_len = 30
     pred_len = 1
     hidden_size = 128
     n_layer = 20
-    n_epochs = 500
+    n_epochs = 200
     lr = 3e-4
     opt = "adamw"
     # for SciNet
