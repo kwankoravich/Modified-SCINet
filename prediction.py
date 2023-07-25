@@ -13,6 +13,7 @@ def predict(model,val_df):
     val_df_norm[cols] = scaler.transform(val_df[cols])
     # print(val_df_norm)
     config.seq_len = 32 # TO DO: will fix later
+    model.eval()
     with torch.no_grad():
         input = torch.tensor(val_df_norm.iloc[-config.seq_len-1:-1].values).float().unsqueeze(dim=0).to(device)
         print(input.shape)
