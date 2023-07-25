@@ -4,3 +4,5 @@ __pycache__
 scaler.save
 *.ipynb
 .DS_Store
+save_models/
+pretrained_models/
