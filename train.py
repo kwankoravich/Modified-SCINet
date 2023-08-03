@@ -17,7 +17,7 @@ from utils.loss import custom_loss
 
 
 
-def train(data):
+def train(data, pretrained_path = None):
 
     config = Config()
     # data = df.copy()
@@ -26,8 +26,8 @@ def train(data):
     train_df, val_df = train_test_split(data, config.train_test_split)
     # display(train_df)
     # train_cp_df, val_cp_df = train_df.iloc[:,:3], val_df.iloc[:,:3]
-    print(f"train_df.shape: {train_df.shape}")
-    print(f"val_df.shape: {val_df.shape}")
+    # print(f"train_df.shape: {train_df.shape}")
+    # print(f"val_df.shape: {val_df.shape}")
 
     ## normalization
     train_df_norm, scaler = normalize(config.norm_method, train_df)
@@ -67,6 +67,7 @@ def train(data):
 
     # create model
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    # device = 'mps' if torch.cuda.is_available() else 'cpu'
 
 
     model = SCINet_decompose(
@@ -85,11 +86,18 @@ def train(data):
                 modified = True,
                 RIN=config.RIN).to(device)
 
-    print(summary(model,
-            input_size=(config.batch_size, config.seq_len, len(train_df.columns)),
-            col_names=["input_size", "output_size", "num_params", "trainable"],
-            col_width=20,
-            row_settings=["var_names"]))
+    if pretrained_path is not None:
+            try:
+                model.load_state_dict(torch.load(pretrained_path))
+            except:
+                pass
+
+
+    # print(summary(model,
+    #         input_size=(config.batch_size, config.seq_len, len(train_df.columns)),
+    #         col_names=["input_size", "output_size", "num_params", "trainable"],
+    #         col_width=20,
+    #         row_settings=["var_names"]))
 
     # optimizer
     n_epochs = config.n_epochs
@@ -172,6 +180,6 @@ def train(data):
             val_loss_per_ep.append(np.average(val_loss))
             val_r2_per_ep.append(np.average(val_r2))
 
-        print(f"[{epoch}/{n_epochs}] ==Train== loss: {np.average(train_loss):.4f}, average_r_squared: {np.average(train_r2):.4f}, lr: {before_lr:.6f} -> {after_lr:.6f} | ==Val== loss: {np.average(val_loss):.4f}, average_r_squared: {np.average(val_r2):.4f}")
+        # print(f"[{epoch}/{n_epochs}] ==Train== loss: {np.average(train_loss):.4f}, average_r_squared: {np.average(train_r2):.4f}, lr: {before_lr:.6f} -> {after_lr:.6f} | ==Val== loss: {np.average(val_loss):.4f}, average_r_squared: {np.average(val_r2):.4f}")
 
     return model

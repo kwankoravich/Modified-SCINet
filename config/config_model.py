@@ -1,5 +1,6 @@
 class Config:
-    train_test_split = 0.9
+    # train_test_split = 0.90 # Full train
+    train_test_split = 0.65 # Finetune
     norm_method = 'standard' # 'minmax', 'standard'
     batch_size = 1024
     seq_len = 30
